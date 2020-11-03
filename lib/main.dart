@@ -1,0 +1,94 @@
+import 'package:flutter/material.dart';
+import 'package:geofencing/data_models/user_location.dart';
+import 'package:geofencing/services/location_service.dart';
+import 'package:provider/provider.dart';
+import 'services/location_service.dart';
+import 'data_models/user_location.dart';
+import 'data_models/objects.dart';
+import 'geofencing.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+List<Object> objects = [];
+int objectCount = 0;
+
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<UserLocation>.value(
+      initialData: UserLocation(),
+      value: LocationService().locationStream,
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          routes: {
+            '/': (context) => HomeView(),
+            'GeoFencing': (context) => GeoFencing(),
+          },
+      )
+    );
+  }
+}
+
+class HomeView extends StatelessWidget {
+  const HomeView({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    objects.add(Object());
+    var userLocation = Provider.of<UserLocation>(context);
+    return Scaffold(
+          body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Location: Lat${userLocation?.latitude}, Long: ${userLocation?.longitude}'),
+              MaterialButton(onPressed: (){
+                objects[objectCount].addPoint(UserLocation(
+                  longitude: userLocation.longitude,
+                  latitude: userLocation.latitude,
+                ));
+              },
+                child: Text('Capture Point'),
+                color: Colors.blue,
+              ),
+              MaterialButton(onPressed: (){
+                objects[objectCount].createObject();
+              },
+                child: Text('Create Object'),
+                color: Colors.blue,
+              ),
+              MaterialButton(onPressed: (){
+                objects[objectCount].clearPoints();
+              },
+                child: Text('Clear Points'),
+                color: Colors.blue,
+              ),
+              MaterialButton(onPressed: (){
+                Navigator.pushNamed(context, 'GeoFencing');
+              },
+                child: Text('GeoFence'),
+                color: Colors.blue,
+              ),
+              MaterialButton(onPressed: (){
+                for(int i = 0; i < objectCount; i++){
+                  print('Object $i');
+                  objects[i].printPoints();
+                }
+              },
+                child: Text('Print Points'),
+                color: Colors.blue,
+              ),
+            ],
+          )    
+        ),
+    );
+  }
+}
