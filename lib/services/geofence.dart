@@ -1,69 +1,43 @@
 import 'dart:async';
-import '../main.dart';
-
+import '../data_models/user_location.dart';
+import '../data_models/objects.dart';
 import 'package:location/location.dart';
 import '../data_models/user_location.dart';
+import '../main.dart';
+import '../geofencing.dart';
 
-class GeoFence{
-  UserLocation _currentLocation;
-  var location = Location();
-  Stream<bool> getLocation() async*{
-    int i = 0; 
-    i += 1;
-    var userLocation = await location.getLocation();
-    if(i % 2 == 0){
-      yield true;
-    }
-    else{
-      yield false;
-    }
+List<bool> is_in_object(UserLocation currentLocation){
+  double x = currentLocation.longitude;
+  double y = currentLocation.latitude;
+  List<bool> results = [];
+
+  for(int i = 0; i < objectCount; i++){
+    results.add(check(x, y, objects[i]));
   }
+
+
+  return results;
 }
 
+bool check(double x, double y, Object object){
+  int count = 0;
+  object.printPoints();
 
-/*
-class LocationService {
-  UserLocation _currentLocation;
+  if(x < object.longitudeMin || x > object.longitudeMax){
+    return false;
+  }
+  if(y < object.latitudeMin || y > object.latitudeMax){
+    return false;
+  }
 
-  var location = Location();
-
-  Stream<UserLocation> getLocation() async*{
-    try {
-      var userLocation = await location.getLocation();
-      _currentLocation = UserLocation(
-        latitude: userLocation.latitude,
-        longitude: userLocation.longitude,
-      );
-    } on Exception catch (e) {
-      print('Could not get location: ${e.toString()}');
+  for(int i = 0; i <object.boundaries.length; i++){
+    if(object.boundaries[i][0] * x + object.boundaries[i][1] * y <= object.boundaries[i][2]){
+      print(object.boundaries[i]);
+      count += 1;
     }
-
-    yield _currentLocation;
   }
-
-  StreamController<UserLocation> _locationController =
-      StreamController<UserLocation>.broadcast();
-
-  Stream<UserLocation> get locationStream => _locationController.stream;
-
-  LocationService() {
-    // Request permission to use location
-    location.requestPermission().then((granted) {
-      if (granted != null) {
-        // If granted listen to the onLocationChanged stream and emit over our controller
-        location.onLocationChanged().listen((locationData) {
-          if (locationData != null) {
-            _locationController.add(UserLocation(
-              latitude: locationData.latitude,
-              longitude: locationData.longitude,
-            ));
-          }
-        });
-      }
-    });
+  if(count % 2 == 1){
+    return true;
   }
+  return false;
 }
-
-
-
-*/

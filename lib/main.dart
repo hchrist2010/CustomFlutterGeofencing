@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geofencing/data_models/user_location.dart';
 import 'package:geofencing/services/location_service.dart';
 import 'package:provider/provider.dart';
+import 'geofencing.dart';
 import 'services/location_service.dart';
 import 'data_models/user_location.dart';
 import 'data_models/objects.dart';
@@ -11,9 +12,25 @@ void main() {
   runApp(MyApp());
 }
 
-List<Object> objects = [];
-int objectCount = 0;
+//List<Object> objects = [];
+//int objectCount = 1;
 
+// UserLocation test1 = UserLocation(
+//     latitude: 61.2180556,
+//     longitude: -149.9002778
+//   );
+//   UserLocation test2 = UserLocation(
+//     latitude: 40.7128,
+//     longitude: 74.0060
+//   );
+//   UserLocation test3 = UserLocation(
+//     latitude: 25.7617,
+//     longitude: 80.1918
+//   );
+//   UserLocation test4 = UserLocation(
+//     latitude: 19.8968,
+//     longitude: 155.5828
+//   );
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -28,8 +45,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
           ),
           routes: {
-            '/': (context) => HomeView(),
-            'GeoFencing': (context) => GeoFencing(),
+            '/': (context) => GeoFencing(),
+//            'GeoFencing': (context) => GeoFencing(),
           },
       )
     );

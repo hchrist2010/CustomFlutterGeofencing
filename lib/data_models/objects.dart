@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:geofencing/main.dart';
 import 'user_location.dart';
+import '../geofencing.dart';
 
 class Object{
   List<dynamic> boundaries = [];
@@ -53,7 +54,7 @@ class Object{
   List createLine(UserLocation p1, UserLocation p2){
     double a, b, c, aMin, aMax, bMin, bMax;
     a = p2.longitude - p1.longitude;
-    b = p2.latitude - p2.latitude;
+    b = p2.latitude - p1.latitude;
     c = a * p2.longitude + b * p2.latitude;
 
     aMin = min(p1.longitude, p2.longitude);
