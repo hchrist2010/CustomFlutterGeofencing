@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:geofencing/main.dart';
+import '../main.dart';
 import 'user_location.dart';
-import '../geofencing.dart';
 
 class Object{
   List<dynamic> boundaries = [];
@@ -33,7 +33,7 @@ class Object{
     //get min and max
     double a, b, c;
     for(int i = 0; i < pointIndex; i++){
-      print('pointLength: ${pointIndex}, i: $i');
+      //print('pointLength: ${pointIndex}, i: $i');
       longitudeMin = min(longitudeMin, points[i].longitude);
       longitudeMax = max(longitudeMax, points[i].longitude);
       latitudeMin = min(latitudeMin, points[i].latitude);
@@ -41,7 +41,7 @@ class Object{
 
       boundaries.add(createLine(points[i], points[i + 1]));
     }
-    print('$pointIndex');
+    //print('$pointIndex');
     longitudeMin = min(longitudeMin, points[pointIndex].longitude);
     longitudeMax = max(longitudeMax, points[pointIndex].longitude);
     latitudeMin = min(latitudeMin, points[pointIndex].latitude);
@@ -49,6 +49,7 @@ class Object{
     boundaries.add(createLine(points[0], points[pointIndex]));
 
     objectCount += 1;
+    //objects[objectCount] = Object();
   }
 
   List createLine(UserLocation p1, UserLocation p2){
