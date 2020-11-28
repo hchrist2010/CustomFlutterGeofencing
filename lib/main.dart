@@ -15,20 +15,20 @@ List<Object> objects = [];
 int objectCount = 0;
 
 UserLocation test1 = UserLocation(
-    latitude: 61.2180556,
-    longitude: -149.9002778
+    latitude: 46.863179,
+    longitude: -123.817776
   );
   UserLocation test2 = UserLocation(
-    latitude: 40.7128,
-    longitude: 74.0060
+    latitude: 46.863534,
+    longitude: -121.816289
   );
   UserLocation test3 = UserLocation(
-    latitude: 25.7617,
-    longitude: 80.1918
+    latitude: 44.862514,
+    longitude: -123.815763
   );
   UserLocation test4 = UserLocation(
-    latitude: 19.8968,
-    longitude: 155.5828
+    latitude: 44.862313,
+    longitude: -121.817454
   );
 
   void initTestObject(){

@@ -27,7 +27,7 @@ bool check(double x, double y, Object object){
   }
 
   for(int i = 0; i <object.boundaries.length; i++){
-    if(object.boundaries[i][0] * x + object.boundaries[i][1] * y <= object.boundaries[i][2]){
+    if((object.boundaries[i][0] * x + object.boundaries[i][1] * y).abs() <= object.boundaries[i][2].abs()){
       count += 1;
     }
   }

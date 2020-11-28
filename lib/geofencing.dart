@@ -4,8 +4,8 @@ import 'services/geofence.dart';
 import 'package:flutter/material.dart';
 
   UserLocation current1 = UserLocation(
-    latitude: 44.5646,
-    longitude: 123.2620
+    latitude: 45.862652,
+    longitude: -122.816757
   );
 
   UserLocation current2 = UserLocation(
