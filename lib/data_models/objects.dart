@@ -32,6 +32,10 @@ class Object{
   void createObject(){
     //get min and max
     double a, b, c;
+    longitudeMin = points[0].longitude;
+    longitudeMax = points[0].longitude;
+    latitudeMin = points[0].latitude;
+    latitudeMax = points[0].latitude;
     for(int i = 0; i < pointIndex; i++){
       //print('pointLength: ${pointIndex}, i: $i');
       longitudeMin = min(longitudeMin, points[i].longitude);
